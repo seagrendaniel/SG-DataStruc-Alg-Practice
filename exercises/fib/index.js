@@ -8,6 +8,44 @@
 // Example:
 //   fib(4) === 3
 
-function fib(n) {}
+
+// My Solution
+// function fib(n) {
+//   let fibArr = [0, 1]
+//   for(let i = 1; i <= n; i++) {
+//     let nextNum = fibArr[i] + fibArr[i-1]
+//     fibArr.push(nextNum)
+//   }
+//   console.log(fibArr)
+//   return fibArr[n]
+// }
+
+function memoize(fn) {
+  const cache = {};
+  return function(...args) {
+    if(cache[args]) {
+      return cache[args];
+    }
+    const result = fn.apply(this, args)
+    cache[args] = result;
+
+    return result;
+  }
+}
+
+
+// Recursive Solution
+function fib(n) {
+  if(n < 2) {
+    return n;
+  }
+  return fib(n-1) + fib(n-2);
+}
+
+fib = memoize(fib);
+
 
 module.exports = fib;
+
+
+// 1-888-237-8289
